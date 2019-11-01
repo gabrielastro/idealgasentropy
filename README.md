@@ -22,14 +22,21 @@ More functions:
 
 ## Notes
 - Ortho:Para ratio is not treated explicitly: Only the limit T >> T_rot ~ 85 K is implemented currently
+
 - No metals. If there should be metals, adding them to helium offers an approximate treatment.
 
+- Written and tested in Python 2 only
+
 ## Comments
-- For most of the relevant rho--T plane, delad from here and from D'Angelo & Bodenheimer (2013), using their functions as implemented in Pluto (Vaidya et al. 2015), agree to better than 5%. However, there are some ~20% differences
+- For most of the relevant rho--T plane, delad from here and from D'Angelo & Bodenheimer (2013; hereafter DAB13), using their functions as implemented in Pluto (Vaidya et al. 2015), agree to better than 5%. However, there are some ~20% differences
 
 - At the lowest pressure of Saumon, Chabrier & van Horn (1995), the gas should be ideal yet there are small piecewise-constant offsets in the entropy. This could be due to a mistake on my part (despite checking and despite the relative simplicity of the equations) or to non-ideal (interaction, not degeneracy) effects being important in SCvH. Their approach is very different from the simple non-perfect ideal gas.
 
 - Some documentation needs to be done... The entropy formula is an "original derivation"; I have not seen it elsewhere but have also not searched, and is relatively easy to derive.
 
+## Comparisons
+- There are some plots in Abb/ showing the goodness of the match of this implementation to DAB13. Why it is not perfect, is not clear
+
+- There are also some comparison to SCvH (see comments above)
 
 All comments, questions, suggestions for improvements, etc. are welcome! Please write to me at uni-tuebingen.de with gabriel.marleau in front.
