@@ -9,7 +9,7 @@ v.1: 31.10.2019 (c) Gabriel-Dominique Marleau, Uni Tübingen
 ## Main functions
 Total specific entropy (per unit mass) _s_ of the mixture, in units of k_B/baryon:
 - stot_proMasse_rhoT(Y, rho, T)        : the main entropy function, but...
-- stot_proMasse_rhoT_bystro(Y, rho, T) : ... this is the same but should be faster because repetitions are avoided
+- stot_proMasse_rhoT_bystro(Y, rho, T) : ... this is the same but should be fast (быстро) because repetitions are avoided
 
 More functions:
 - deladDAB13_rhoT(Y, rho, T)           : adiabatic gradient (dlnT/dlnP)\_{const s}
