@@ -608,7 +608,14 @@ def Druck_rhoT(Y,rho,T,Z=0):
 # Achtung: Reihenfolge anders weil rho das 1. sein muß
 def DeltaDruck(rho, Y,T,PZiel):
 	P = Druck_rhoT(Y,rho,T)
-	#print rho, " P:", P, " Delta P:", P - PZiel, " P/P-1:", P/PZiel -1, "Ziel:", PZiel
+	
+	#lg = np.log(P/PZiel)	
+	#x = (lg**2. + (P - PZiel)**2.)
+	#print '  > ',PZiel, P, rho, x, lg
+	##return x if lg > 0 else -x
+	##return lg
+	
+	# ist doch am besten:
 	return P - PZiel
 
 # von https://github.com/andrewcumming/gasgiant (David Berardo) übernommen und angepaßt
@@ -617,16 +624,38 @@ def Dichte_PT(Y,P,T):
 	Wenn keine Lösung: rho = 0 || If no solution is found, return 0
 	'''
 	# großzügige Grenzen || generous boundaries
-	rhomin = 1e-25
+	rhomin = 1e-40
 	rhomax = 1e2
 	eps = 1e-8
+	# WICHTIG!:
+	#  der Nullstellenfinder benutzt
+	#    np.allclose(x, x0, atol=xtol, rtol=rtol)
+	#  als Kriterium aber der Standardwert für xtol ist 1e-5...
+	#    http://lagrange.univ-lyon1.fr/docs/numpy/1.11.0/reference/generated/numpy.allclose.html
+	# -> das geht also nicht, wenn rho < 1e-5 sein soll!
+	#   und doch ist atol=0 nicht erlaubt
+	atol = rhomin/1e6
 	f1 = DeltaDruck(rhomin,Y,T,P)
 	f2 = DeltaDruck(rhomax,Y,T,P)
+	
 	if (f1<0.0 and f2<0.0) or (f1>0.0 and f2>0.0):
 		print("[Dichte_PT] keine Lösung -> rho = 0 || no solution") # T,P,f1,f2)
 		return 0.0
-	rho = brentq(DeltaDruck,rhomin,rhomax,rtol=eps,args=(Y,T,P))
+	rho = brentq(DeltaDruck,rhomin,rhomax,rtol=eps,xtol=atol,args=(Y,T,P))
+	
+	# überprüfen, ob es gut übereinstimmt:
+	#print '*  ', P, rho*kB*T/muDAB13(Y,rho,T)/mH, rho
+	
 	return rho
+
+
+def nHDAB13(Y,rho,T,Z=0):
+	'''number density of atomic hydrogen'''
+	
+	XH2 = XH2_rhoT(rho,T)
+	XHI = XHI_rhoT(rho,T)
+	
+	return 2*rho/amu / ( 1 + 3.*XH2 + XHI ) * XHI
 
 
 # =================================================================
