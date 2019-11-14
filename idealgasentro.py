@@ -632,19 +632,20 @@ def Dichte_PT(Y,P,T):
 	#    np.allclose(x, x0, atol=xtol, rtol=rtol)
 	#  als Kriterium aber der Standardwert für xtol ist 1e-5...
 	#    http://lagrange.univ-lyon1.fr/docs/numpy/1.11.0/reference/generated/numpy.allclose.html
-	# -> das geht also nicht, wenn rho < 1e-5 sein soll!
-	#   und doch ist atol=0 nicht erlaubt
-	atol = rhomin/1e6
+	# -> das geht also unter Umständen nicht, wenn rho klein sein soll!
+	#   Da atol=0 nicht erlaubt ist, benutzen wir 1e-308
+	atol = 1e-308
 	f1 = DeltaDruck(rhomin,Y,T,P)
 	f2 = DeltaDruck(rhomax,Y,T,P)
 	
-	if (f1<0.0 and f2<0.0) or (f1>0.0 and f2>0.0):
+	if (f1*f2 > 0.0):
 		print("[Dichte_PT] keine Lösung -> rho = 0 || no solution") # T,P,f1,f2)
 		return 0.0
-	rho = brentq(DeltaDruck,rhomin,rhomax,rtol=eps,xtol=atol,args=(Y,T,P))
+	rho = brentq(DeltaDruck,rhomin,rhomax,xtol=atol,rtol=eps,args=(Y,T,P))
 	
-	# überprüfen, ob es gut übereinstimmt:
-	#print '*  ', P, rho*kB*T/muDAB13(Y,rho,T)/mH, rho
+	## überprüfen, ob es gut übereinstimmt:
+	#Pcheck = Druck_rhoT(Y,rho,T)   #rho*kB*T/muDAB13(Y,rho,T)/mH
+	#print '*  ', P, Pcheck, rho, P/Pcheck
 	
 	return rho
 
