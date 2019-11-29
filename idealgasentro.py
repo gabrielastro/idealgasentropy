@@ -618,7 +618,7 @@ def DeltaDruck(rho, Y,T,PZiel):
 	# ist doch am besten:
 	return P - PZiel
 
-# von https://github.com/andrewcumming/gasgiant (David Berardo) übernommen und angepaßt
+# von https://github.com/andrewcumming/gasgiant (David Berardo) übernommen und (sehr) angepaßt
 def Dichte_PT(Y,P,T):
 	'''Dichte aus (P,T) mit den DAB13-Funktionen invertieren || Invert density from (P,T) with the DAB13 functions
 	Wenn keine Lösung: rho = 0 || If no solution is found, return 0
@@ -635,6 +635,7 @@ def Dichte_PT(Y,P,T):
 	# -> das geht also unter Umständen nicht, wenn rho klein sein soll!
 	#   Da atol=0 nicht erlaubt ist, benutzen wir 1e-308
 	atol = 1e-308
+	
 	f1 = DeltaDruck(rhomin,Y,T,P)
 	f2 = DeltaDruck(rhomax,Y,T,P)
 	
@@ -715,11 +716,11 @@ def ZGTabellespeichern(Y, OP="T.gg.Trot", K=0,Protonspin=True):
 	logTmax = 5.
 	logrhomin = -23.
 	logrhomax = 0.
-
-	# ZUTUN TODO Kopfzeile, wie in /home/gabriel/Dokumente/Rolf_2013-09-17/src/ModifiedPluto/main.c
-	#np.savetxt(Dateiname,"#            1:T       2:rho         3:P          4:mu     5:Gamm1        6:cv(kB/mH)7:eint(erg/g)  8:gammaeff                 9:x            10:y           11:z1           12:z2      13:delad   14:cp(kB/mH)  15:dlnrhodlnT_P_rhoT   16:chiT   17:Gamm3\n")
 	
+	# ACHTUNG: viele Größen werden nicht ausgerechnet und sind deswegen Null
 	with open(Dateiname,'w') as fd:
+		# Kopfzeile wie in /home/gabriel/Dokumente/Rolf_2013-09-17/src/ModifiedPluto/main.c
+		fd.write("#-------------1:T       2:rho         3:P          4:mu     5:Gamm1        6:cv(kB/mH)7:eint(erg/g)  8:gammaeff                 9:x            10:y           11:z1           12:z2      13:delad   14:cp(kB/mH)  15:dlnrhodlnT_P_rhoT   16:chiT   17:Gamm3   18:Entropie(kB/mH)\n")
 		for j in range(nrho):
 			
 			rho = 10.**(logrhomin + j*(logrhomax-logrhomin)/1./(nrho-1))
