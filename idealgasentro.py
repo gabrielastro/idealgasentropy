@@ -658,7 +658,7 @@ def nHDAB13(Y,rho,T,Z=0):
 	XHI = XHI_rhoT(rho,T)
 	
 	# ACHTUNG: in Gl. 36 und 37 von Saumon, Chabrier & van Horn (1995)
-	#          wird so getan, als ob das rho nur von H bzw. He kommt
+	#          wird so getan, als ob das rho nur von H bzw. He komme
 	#          -> Faktor X=1-Y-Z
 	return 2*rho*(1.-Y-Z)/amu / ( 1 + 3.*XH2 + XHI ) * XHI
 
