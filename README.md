@@ -4,7 +4,11 @@ _JMJ-V!_
 Entropie (und etwas mehr) eines idealen (nicht perfekten!) H+He-Gases wie in D'Angelo & Bodenheimer (2013) ausrechnen
 || Compute the entropy (and a bit more) of an ideal (but not perfect!) H+He gas as in D'Angelo & Bodenheimer (2013)
 
-v.1: 31.10.2019 (c) Gabriel-Dominique Marleau, Uni Tübingen
+(c) Gabriel-Dominique Marleau, Uni Tübingen,
+    with parts taken from [https://github.com/andrewcumming/gasgiant](gasgiant) from Andrew Cumming / David Berardo
+
+v.1.0, 31.10.2019: Initial commit
+v.1.1, 03.03.2023: Making a python package for easy import
 
 ## Main functions
 Total specific entropy (per unit mass) _s_ of the mixture, in units of k_B/baryon:
@@ -19,9 +23,9 @@ More functions:
 - Dichte_PT(Y, P, T)                   : get rho from P and T; taken from David Berardo from https://github.com/andrewcumming/gasgiant and (very) adapted
  
 ### Conventions
-- rho: density,         always in g/cm^3
-- T:   temperature,     always in K
-- Y:   helium fraction, always dimensionless
+- rho: density,              always in g/cm^3
+- T:   temperature,          always in K
+- Y:   helium mass fraction, always dimensionless
 
 ## Notes
 - Ortho:Para ratio is not treated explicitly: Only the limit T >> T_rot ~ 85 K is currently implemented
