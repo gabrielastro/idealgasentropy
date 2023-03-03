@@ -7,8 +7,8 @@ Entropie (und etwas mehr) eines idealen (nicht perfekten!) H+He-Gases wie in D'A
 (c) Gabriel-Dominique Marleau, Uni Tübingen,
     with parts taken from [https://github.com/andrewcumming/gasgiant](gasgiant) from Andrew Cumming / David Berardo
 
-v.1.0, 31.10.2019: Initial commit
-v.1.1, 03.03.2023: Making a python package for easy import
+- v.1.0, 31.10.2019: Initial commit
+- v.1.1, 03.03.2023: Making a python package for easy import
 
 ## Main functions
 Total specific entropy (per unit mass) _s_ of the mixture, in units of k_B/baryon:
