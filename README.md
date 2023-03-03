@@ -11,9 +11,12 @@ Total specific entropy (per unit mass) _s_ of the mixture, in units of k_B/baryo
 - stot_proMasse_rhoT(Y, rho, T)        : the main entropy function, but...
 - stot_proMasse_rhoT_bystro(Y, rho, T) : ... this is the same but should be fast (быстро) because repetitions are avoided
 
+The same functions exist with ..._PT() to give (P,T) as arguments (simple wrappers)
+
 More functions:
 - deladDAB13_rhoT(Y, rho, T)           : adiabatic gradient (dlnT/dlnP)\_{const s}
 - muDAB13(Y, rho, T)                   : mean molecular weight, dimensionless
+- Dichte_PT(Y, P, T)                   : get rho from P and T; taken from David Berardo from https://github.com/andrewcumming/gasgiant and (very) adapted
  
 ### Conventions
 - rho: density,         always in g/cm^3

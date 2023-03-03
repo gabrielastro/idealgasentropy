@@ -23,7 +23,7 @@ from scipy.optimize import brentq
 # nur in (i)python sinnvoll:
 #%load_ext autoreload
 #%autoreload 2
-# this will reload automatically when the library (the source file interpkappa.py) is changed
+# this will reload automatically when the library (the source file idealgasentro.py) is changed
 
 # Naming convention:
 #  - Species:
@@ -481,6 +481,28 @@ def sMisch_proMasse_rhoT(Y,rho,T):
 
 # 
 # die Gesamtentropie der Mischung pro Masseneinheit, in kB/mH
+#  als Funktion von (P,T)
+# 
+def stot_proMasse_PT(Y, P, T, OP="T.gg.Trot", K=0,Protonspin=True):
+	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
+	Changes (P,T) to (rho,T) and calls stot_proMasse_rhoT()
+	-> see its documentation
+	'''
+	rho = Dichte_PT(Y,P,T)
+	return stot_proMasse_rhoT(Y, rho, T, OP=OP, K=K,Protonspin=Protonspin)
+
+def stot_proMasse_PT_bystro(Y, P, T, OP="T.gg.Trot", K=0,Protonspin=True):
+	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
+	Changes (P,T) to (rho,T) and calls stot_proMasse_rhoT_bystro()
+	-> see its documentation
+	'''
+	rho = Dichte_PT(Y,P,T)
+	return stot_proMasse_rhoT_bystro(Y, rho, T, OP=OP, K=K,Protonspin=Protonspin)
+
+
+# 
+# die Gesamtentropie der Mischung pro Masseneinheit, in kB/mH
+#  als Funktion von (rho,T)
 #
 def stot_proMasse_rhoT(Y, rho, T, OP="T.gg.Trot", K=0,Protonspin=True):
 	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
