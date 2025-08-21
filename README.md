@@ -4,7 +4,7 @@ _JMJ-V!_
 Entropie (und etwas mehr) eines idealen (nicht perfekten!) H+He-Gases wie in D'Angelo & Bodenheimer (2013) ausrechnen
 || Compute the entropy (and a bit more) of an ideal (but not perfect!) H+He gas as in D'Angelo & Bodenheimer (2013)
 
-(c) Gabriel-Dominique Marleau, Uni Tübingen,
+(c) Gabriel-Dominique Marleau, Uni Tübingen/Uni Duisburg/Uni Bern/MPIA,
     with parts taken from [https://github.com/andrewcumming/gasgiant](gasgiant) from Andrew Cumming / David Berardo
 
 - v.1.0, 31.10.2019: Initial commit
