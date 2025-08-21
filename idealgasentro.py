@@ -5,10 +5,11 @@
 # -------------------------------------------------------------------
 #  Entropie als Funktion von Y, rho, T für ein ideales Gas
 #  
-#   30.10.2019 (c) Gabriel-Dominique Marleau, Uni Tübingen
-#   gabriel.marleau@uni-tuebingen.de
-# 
-# 
+#   30.10.2019 (c) Gabriel-Dominique Marleau,
+#                  Uni Tübingen/Uni Duisburg/Uni Bern/MPIA
+#   gabriel.marleau@uni-due.de
+#  
+#  
 #  
 #  * Gilt im Moment nur für T >> thetarot ~ 85 K ! *
 #    vgl. Abb. 2 von Vaytet et al. (2014) -> wohl ca. wie Gleichgewichtsverhältnis
@@ -124,7 +125,8 @@ def z2DAB13(Y,rho,T,Z=0):
 
 
 # =================================================================
-#  X_i's (SCvH) ab x,y,z1,z2 || X_i's (DAB13) from x,y,z1,z2
+#  X_i's (SCvH) ab x,y,z1,z2
+#  || X_i's (DAB13) from x,y,z1,z2
 # =================================================================
 
 def XH2(x,y):
@@ -170,7 +172,8 @@ def XeHe  (z1,z2):
 
 
 # =================================================================
-#  X_i's und mu ab den anderen X_i's || X_i's and mu from the other X_i's
+#  X_i's und mu ab den anderen X_i's
+#  || X_i's and mu from the other X_i's
 # =================================================================
 
 def XeH_SCvH(XH2,XHI):
@@ -179,7 +182,8 @@ def XeH_SCvH(XH2,XHI):
 	return 0. if x < minXe else x
 
 def mu_Htot(XH2,XHI):
-	'''Mittlere Molekularmasse für Wasserstoff || Mean molecular weight for hydrogen species'''
+	'''Mittlere Molekularmasse für Wasserstoff
+	|| Mean molecular weight for hydrogen species'''
 	return 0.5*(1+3*XH2+XHI)
 
 # -----------------------------------------------------------------
@@ -193,12 +197,14 @@ def XeHe_SCvH(XHeI,XHeII):
 	return x
 
 def mu_Hetot(XHeI,XHeII):
-	'''Mittlere Molekularmasse für Helium || Mean molecular weight for helium species'''
+	'''Mittlere Molekularmasse für Helium
+	|| Mean molecular weight for helium species'''
 	
 	return 4./3.*(1+2*XHeI+XHeII)
 
 # =================================================================
-#  X_i's ab rho und T || X_i's from rho and T
+#  X_i's ab rho und T
+#  || X_i's from rho and T
 # =================================================================
 # 
 # For the following functions the dependence in Y cancels out,
@@ -241,7 +247,8 @@ def XeHe_rhoT  (rho,T):
 	return XHeII_rhoT(rho,T) + 2.*XHeIII_rhoT(rho,T)
 
 # =================================================================
-#  Entropien pro Teilchen für Wasserstoff oder Helium || Entropies per particle for hydrogen or helium
+#  Entropien pro Teilchen für Wasserstoff oder Helium
+#  || Entropies per particle for hydrogen or helium
 # =================================================================
 
 # Entropie pro monatomisches Teilchen
@@ -277,7 +284,8 @@ def Sdia_proTeilchen(rho,T,OP):
 # -----------------------------------------------------------------
 
 def sH2_proMasse_rhoT(rho,T,OP):
-	'''Entropie pro Masseneinheit wenn nur H2 || Entropy per unit mass of only H2
+	'''Entropie pro Masseneinheit wenn nur H2
+	|| Entropy per unit mass of only H2
 	     OP = "T.gg.Trot":  Ortho-zu-Para wenn T >> theta_rot
 	          [nur diese Modus ist zurzeit verfügbar]
 	'''
@@ -366,7 +374,8 @@ def alphaIdeal(F_einhalb):
 # TODO ZUTUN man könnte vielleicht ne_H und ne_He mit einer Kombination
 #      aus anderen Funktionen in dieser Datei ersetzen
 def ne_H (rho,T):
-	'''Elektronenanzahldichte für „Wasserstoffelektronen“ || Electron number density of "hydrogen electrons"
+	'''Elektronenanzahldichte für „Wasserstoffelektronen“
+	|| Electron number density of "hydrogen electrons"
 	'''
 	XH2 = XH2_rhoT(rho,T)
 	XHI = XHI_rhoT(rho,T)
@@ -374,7 +383,8 @@ def ne_H (rho,T):
 	return rho/mH * ( 1 - XH2 - XHI )/( 1 + 3*XH2 + XHI )
 
 def ne_He(rho,T):
-	'''Elektronenanzahldichte für „Heliumelektronen“ || Electron number density of "helium electrons"
+	'''Elektronenanzahldichte für „Heliumelektronen“
+	|| Electron number density of "helium electrons"
 	'''
 	XHeI  = XHeI_rhoT(rho,T)
 	XHeII = XHeII_rhoT(rho,T)
@@ -484,7 +494,8 @@ def sMisch_proMasse_rhoT(Y,rho,T):
 #  als Funktion von (P,T)
 # 
 def stot_proMasse_PT(Y, P, T, OP="T.gg.Trot", K=0,Protonspin=True):
-	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
+	'''Gesamtentropie pro Gramm einer H+He-Mischung
+	|| Total entropy per unit mass of an H+He mixture
 	Changes (P,T) to (rho,T) and calls stot_proMasse_rhoT()
 	-> see its documentation
 	'''
@@ -492,7 +503,8 @@ def stot_proMasse_PT(Y, P, T, OP="T.gg.Trot", K=0,Protonspin=True):
 	return stot_proMasse_rhoT(Y, rho, T, OP=OP, K=K,Protonspin=Protonspin)
 
 def stot_proMasse_PT_bystro(Y, P, T, OP="T.gg.Trot", K=0,Protonspin=True):
-	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
+	'''Gesamtentropie pro Gramm einer H+He-Mischung
+	|| Total entropy per unit mass of an H+He mixture
 	Changes (P,T) to (rho,T) and calls stot_proMasse_rhoT_bystro()
 	-> see its documentation
 	'''
@@ -505,7 +517,8 @@ def stot_proMasse_PT_bystro(Y, P, T, OP="T.gg.Trot", K=0,Protonspin=True):
 #  als Funktion von (rho,T)
 #
 def stot_proMasse_rhoT(Y, rho, T, OP="T.gg.Trot", K=0,Protonspin=True):
-	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
+	'''Gesamtentropie pro Gramm einer H+He-Mischung
+	|| Total entropy per unit mass of an H+He mixture
 	  Y: helium mass fraction
 	rho: density (g/cm^3)
 	  T: temperature (K)
@@ -521,7 +534,8 @@ def stot_proMasse_rhoT(Y, rho, T, OP="T.gg.Trot", K=0,Protonspin=True):
 
 # wie stot_proMasse_rhoT aber schneller -- Formeln sonst gleich
 def stot_proMasse_rhoT_bystro(Y, rho, T, OP="T.gg.Trot", K=0,Protonspin=True):
-	'''Gesamtentropie pro Gramm einer H+He-Mischung || Total entropy per unit mass of an H+He mixture
+	'''Gesamtentropie pro Gramm einer H+He-Mischung
+	|| Total entropy per unit mass of an H+He mixture
 	   * Schnellere Ausrechnung als mit stot_proMasse_rhoT weil Unterfunktionen hineinkopiert
 	     || Faster execution than with stot_proMasse_rhoT because subroutines copied into this function
 	  
@@ -642,12 +656,14 @@ def DeltaDruck(rho, Y,T,PZiel):
 
 # von https://github.com/andrewcumming/gasgiant (David Berardo) übernommen und (sehr) angepaßt
 def Dichte_PT(Y,P,T):
-	'''Dichte aus (P,T) mit den DAB13-Funktionen invertieren || Invert density from (P,T) with the DAB13 functions
-	Wenn keine Lösung: rho = 0 || If no solution is found, return 0
+	'''Dichte aus (P,T) mit den DAB13-Funktionen invertieren
+	|| Invert density from (P,T) with the DAB13 functions
+	Wenn keine Lösung: rho = 0
+	|| If no solution is found, return 0
 	'''
 	# großzügige Grenzen || generous boundaries
-	rhomin = 1e-40
-	rhomax = 1e2
+	rhomin = 1e-30
+	rhomax = 1e3
 	eps = 1e-8
 	# WICHTIG!:
 	#  der Nullstellenfinder benutzt
@@ -686,7 +702,8 @@ def nHDAB13(Y,rho,T,Z=0):
 
 
 # =================================================================
-#  delad berechnen um effektiv die Entropie mit DAB13 vergleichen zu können || compute delad to compare with DAB13
+#  delad berechnen um effektiv die Entropie mit DAB13 vergleichen zu können
+#  || compute delad to compare with DAB13
 # =================================================================
 
 def deladDAB13_rhoT(Y,rho,T, OP="T.gg.Trot", K=0,Protonspin=True):
