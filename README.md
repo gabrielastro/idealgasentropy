@@ -46,4 +46,4 @@ More functions:
 
 - There are also some comparison to SCvH (see comments above).
 
-All comments, questions, suggestions for improvements, etc. are welcome! Please write to me at uni-tuebingen.de with gabriel.marleau in front.
+All comments, questions, suggestions for improvements, etc. are welcome! Please write to me at uni-due.de with gabriel.marleau in front (address should be valid until at least 2029 :)).
